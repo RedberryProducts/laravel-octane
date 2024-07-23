@@ -61,10 +61,16 @@ class ApplicationFactory
 
         $method->setAccessible(true);
 
+        $bootstrappers = $method->invoke($kernel);
+
+        // Replace RegisterProviders with OctaneRegisterProviders
+        $replaceIndex = array_search(RegisterProviders::class, $bootstrappers, true);
+        $bootstrappers = array_replace($bootstrappers, [$replaceIndex => OctaneRegisterProviders::class]);
+
         return $this->injectBootstrapperBefore(
-            RegisterProviders::class,
+            OctaneRegisterProviders::class,
             SetRequestForConsole::class,
-            $method->invoke($kernel)
+            $bootstrappers
         );
     }
 

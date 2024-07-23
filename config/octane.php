@@ -121,6 +121,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Operation Scoped ServiceProviders
+    |--------------------------------------------------------------------------
+    |
+    | Here you can list service providers which should be registered
+    | on start of each operation, rather than during boot process.
+    |
+    */
+
+    'op_service_providers' => [
+        //
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Warm / Flush Bindings
     |--------------------------------------------------------------------------
     |
