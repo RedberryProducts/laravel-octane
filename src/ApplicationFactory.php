@@ -63,7 +63,6 @@ class ApplicationFactory
 
         $bootstrappers = $method->invoke($kernel);
 
-        // Replace RegisterProviders with OctaneRegisterProviders
         $replaceIndex = array_search(RegisterProviders::class, $bootstrappers, true);
         $bootstrappers = array_replace($bootstrappers, [$replaceIndex => OctaneRegisterProviders::class]);
 
