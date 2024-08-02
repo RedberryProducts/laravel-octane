@@ -4,7 +4,7 @@ namespace Laravel\Octane;
 
 use Illuminate\Contracts\Foundation\Application;
 use Laravel\Octane\OctaneProviderRepository;
-use Illuminate\Filesystem\FileSystem;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Bootstrap\RegisterProviders;
 
 class OctaneRegisterProviders extends RegisterProviders
@@ -24,7 +24,7 @@ class OctaneRegisterProviders extends RegisterProviders
             $this->mergeAdditionalProviders($app);
         }
 
-        $providerRepository = new OctaneProviderRepository($app, new FileSystem, $app->getCachedServicesPath());
+        $providerRepository = new OctaneProviderRepository($app, new Filesystem, $app->getCachedServicesPath());
 
         $app->registerConfiguredProviders($providerRepository);
     }
