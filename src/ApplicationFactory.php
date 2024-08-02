@@ -45,7 +45,14 @@ class ApplicationFactory
 
         $app->bootstrapWith($this->getBootstrappers($app));
 
-        $app->loadDeferredProviders();
+        // We will register all but operation scoped deferred providers right away so
+        // they are resolved once, during boot. Remaining operation providers will 
+        // be registered with classical approach, during the occasions of need.
+        foreach ($app->getDeferredServices() as $service => $provider) {
+            if (!in_array($provider, $app->make('config')->get('octane.op_service_providers', []))) {
+                $app->loadDeferredProvider($service);
+            }
+        }
 
         return $app;
     }

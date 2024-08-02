@@ -14,6 +14,8 @@ class RegisterOperationServiceProviders
         $resolved_providers = [];
 
         foreach ($event->sandbox->make('config')->get('octane.op_service_providers', []) as $provider) {
+            $provider = $event->sandbox->resolveProvider($provider);
+            if ($provider->isDeferred()) continue;
             $resolved_providers[] = $event->sandbox->register($provider, boot: false);
         }
 
